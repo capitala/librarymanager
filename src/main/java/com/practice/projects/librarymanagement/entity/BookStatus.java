@@ -2,10 +2,13 @@ package com.practice.projects.librarymanagement.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class BookStatus {
@@ -15,6 +18,10 @@ private long id;
 private String status;
 private Date borrowingDate;
 private Date expectedReturnDate;
+@OneToOne
+@JoinColumn(name = "book_detail_id")
+private BookDetail bookDetail;
+@OneToOne(mappedBy="status",cascade= CascadeType.ALL)
 private MemberDetail borrower;
 public long getId() {
 	return id;
@@ -47,4 +54,10 @@ public void setBorrower(MemberDetail borrower) {
 	public String toString() {
 		return this.getId()+this.getBorrower().getId()+this.getStatus()+this.getBorrowingDate()+this.getExpectedReturnDate();
 	}
+public BookDetail getBookDetail() {
+	return bookDetail;
+}
+public void setBookDetail(BookDetail bookDetail) {
+	this.bookDetail = bookDetail;
+}
 }

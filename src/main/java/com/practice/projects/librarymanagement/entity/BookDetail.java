@@ -1,9 +1,11 @@
 package com.practice.projects.librarymanagement.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class BookDetail {
@@ -22,7 +24,7 @@ public class BookDetail {
 	private String genre;
 
 	private int publicationYear;
-
+	@OneToOne(mappedBy="status",cascade= CascadeType.ALL)
 	private BookStatus status;
 
 	public long getId() {
